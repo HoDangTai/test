@@ -1,0 +1,43 @@
+﻿@model QuanLyNhanSu_HoDangTai_63135354.Models.PHANCONG
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Thêm thông tin phân công</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.MAPC, "Mã Phân Công:", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.MAPC, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @placeholder = @ViewBag.maPC } })
+                @Html.ValidationMessageFor(model => model.MAPC, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MACA, "Mã Ca Làm Việc:", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.MACA, @ViewBag.MACA as SelectList, "Chọn mã ca làm việc", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MACA, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MANV, "Mã Nhân Viên:", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("MANV", @ViewBag.MANV as SelectList, "Chọn mã nhân viên", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MANV, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Tạo" class="btn btn-primary" />|
+                @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

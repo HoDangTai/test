@@ -1,0 +1,72 @@
+﻿@model QuanLyNhanSu_HoDangTai_63135354.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "Details";
+    string gioiTinh = "Nam";
+
+}
+
+
+<style>
+    .boxConfirm {
+        width: 400px;
+        height: 220px;
+        margin: 0 auto;
+        border: 1px solid black;
+        margin-top: 20px;
+    }
+
+        .boxConfirm > .imageContent {
+            float: left;
+            width: 30%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .boxConfirm > .imageContent > img {
+                width: 80%;
+                height: 50%;
+                border-radius: 50%;
+            }
+
+        .boxConfirm > .content {
+            float: left;
+            width: 70%;
+            height: 100%;
+        }
+</style>
+
+<hr />
+<div class="boxConfirm">
+    <h3><b>THÔNG TIN CHI TIẾT</b></h3>
+    <div class="imageContent">
+        <img src="~/Images/@Html.DisplayFor(model=>model.ANHNV)" alt="...."/>
+    </div>
+    <div id="content">
+        <div>Họ và tên:  @ViewBag.FullName</div>
+        <div>Chức vụ: @Html.DisplayFor(model => model.CHUCVU.TENCV)</div>
+
+        <div>
+            Giới tính:  @{
+                if (ViewBag.Gendar == false)
+                {
+                    gioiTinh = "Nữ";
+                }
+
+            }@gioiTinh
+        </div>
+        <div>Ngày sinh: @Html.DisplayFor(model => model.NGAYSINH)</div>
+        <div>Địa chỉ: @Html.DisplayFor(model => model.DIACHI)</div>
+        <div>SDT: @Html.DisplayFor(model => model.SDT)</div>
+        <div>Email: @Html.DisplayFor(model => model.EMAIL)</div>
+        <div>Ngày vào làm: @Html.DisplayFor(model => model.NGAYVAOLAM)</div>
+        <div>CCCD: @Html.DisplayFor(model => model.CCCD)</div>
+
+    </div>
+     </div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { id = Model.MANV }) |
+    @Html.ActionLink("Trở lại", "Index")
+</p>

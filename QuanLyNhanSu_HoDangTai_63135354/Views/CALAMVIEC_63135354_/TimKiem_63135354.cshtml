@@ -1,0 +1,180 @@
+﻿@model List<QuanLyNhanSu_HoDangTai_63135354.Models.CALAMVIEC>
+
+@{
+    ViewBag.Title = "TimKiem_63135354";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "MACA", rowsPerPage: 2);
+    @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
+}
+
+
+
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: Calibri, sans-serif;
+        }
+
+        .grid-footer {
+            color: #000;
+            font: 17px Calibri;
+            text-align: center;
+            font-weight: bold;
+        }
+
+            .grid-footer a {
+                background-color: #ffffff;
+                color: blue;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                padding: 5px 15px;
+                text-decoration: none;
+                border-radius: 4px;
+            }
+
+                .grid-footer a:active,
+                .grid-footer a:hover {
+                    background-color: #ffffff;
+                    color: #FFAD33;
+                    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                }
+
+        .alternatingRowStyle {
+            background-color: #f2f2f2;
+        }
+
+        .table1 {
+            text-align: left;
+            margin: 30px auto;
+            width: 80%;
+        }
+
+        input[type="submit"],
+        input[type="button"] {
+            margin-top: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        .dropdownTimKiem {
+            margin: 5px 0;
+            width: 70%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"] {
+            margin: 5px 0;
+        }
+
+        .dropdown {
+            margin: 5px 0;
+        }
+
+        .edit-btn {
+            margin-right: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("TimKiem_63135354", "CALAMVIEC_63135354_", FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+
+            <table class="table1" align="center">
+                <tr>
+                    <td>
+                        <div>Mã ca</div>
+                    </td>
+                    <td>
+                        <input type="text" name="maCA" value="@ViewBag.maCA" />
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>Mô tả</td>
+                    <td>
+                        @Html.DropDownList("moTa", new SelectList(new[]
+                        {
+                            new { Value = "Ca sáng", Text = "Ca sáng" },
+                            new { Value = "ch", Text = "Ca chiều" },
+                            new { Value = "t", Text = "Ca tối" }
+                        }, "Value", "Text", ViewBag.moTa), "-- Chọn mô tả --", new { @class = "dropdownTimKiem" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Ngày làm việc</td>
+                    <td>
+                        <input type="date" name="ngayLamViec" value="@ViewBag.ngayLamViec" />
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" class="btn btn-primary" name="submit" value="Tìm kiếm" style="margin-left: 5px;
+                background-color: blue;color:white" />
+                        <input type="button" class="btn btn-primary" name="Nhapmoi" value="Nhập mới" style="margin-left: 5px;
+                background-color: blue;color:white" onclick="location.href='@Url.Action("TimKiem_63135354", "CALAMVIEC_63135354_/TimKiem_63135354")'" />
+
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+
+
+    <div id="gridContent">
+        @ViewBag.TB
+        @grid.GetHtml(
+            tableStyle: "table table-bordered table-hover",
+            footerStyle: "grid-footer",
+            fillEmptyRows: true,
+            mode: WebGridPagerModes.Numeric,
+            alternatingRowStyle: "alternatingRowStyle",
+              columns: new[]  // colums in grid
+             {
+              grid.Column("MACA","Mã ca"), //the model fields to display
+
+                grid.Column("MOTACALAMVIEC","Mô tả ca làm việc"), //the model fields to display
+                grid.Column("TGBATDAU","Thời gian bắt đầu"),
+                           grid.Column("TGKETTHUC", "Thời gian kết thúc"),
+
+    grid.Column("NGAYLAMVIEC","Ngày làm việc",format:@<text> @item.NGAYLAMVIEC.ToString("dd/MM/yyyy")</text>),
+
+grid.Column("SLNHANVIEN","Số lượng nhân viên"),
+
+grid.Column("Chức năng", format: @<text>
+        <a href="@Url.Action("Edit","CALAMVIEC_63135354_",new { id = item.MACA})" class="edit-btn">
+            <abbr title="Cập nhật dữ liệu"><img src="~/images_res/edit.png" width="20" height="20" /></abbr>
+        </a>
+        <a href="@Url.Action("Details",
+                new { id = item.MACA})" class="edit-btn"><abbr title="Xem chi tiết"><img src="~/images_res/details.png" width="20" height="20" /></abbr></a>
+        <a href="@Url.Action("Delete",
+                new { id = item.MACA})" class="edit-btn">
+            <abbr title="Xóa dữ liệu">
+                <img src="~/images_res/delete.png" width="20" height="20" />
+            </abbr>
+        </a>
+</text>),
+
+}
+)
+    </div>
+</body>
+</html>
+

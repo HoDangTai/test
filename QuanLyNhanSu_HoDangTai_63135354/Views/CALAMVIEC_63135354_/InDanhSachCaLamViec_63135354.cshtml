@@ -1,0 +1,152 @@
+﻿
+
+@model IEnumerable<QuanLyNhanSu_HoDangTai_63135354.Models.CALAMVIEC>
+
+@{
+    ViewBag.Title = "InDanhSachCaLamViec_63135354";
+    int i = 0;
+}
+
+
+
+<title>Bản in</title>
+<table style="margin-top: 60px; border-collapse: collapse;" width='700'>
+    <tr>
+        <th align='left'>
+            NHÀ HÀNG CHAMPA ISLAND
+        </th>
+    </tr>
+    <tr>
+        <th align='center' style='height:35px'>
+            DANH SÁCH CA LÀM VIỆC
+        </th>
+    </tr>
+</table>
+<br />
+<table id='tb_main_body' style='border-collapse: collapse;' name='tb_main_body' class="table-print" border="1">
+    <tr>
+
+
+        <th>
+            STT
+        </th>
+        <th>
+            Mã ca
+        </th>
+        <th>
+            Mô tả ca làm việc
+        </th>
+        <th>
+            Thời gian bắt đầu
+        </th>
+        <th>
+            Thời gian kết thúc
+        </th>
+        <th>
+            Ngày làm việc
+        </th>
+        <th align="center">
+            Số lượng nhân viên
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @{i++;}
+                @i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MACA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MOTACALAMVIEC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TGBATDAU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TGKETTHUC)
+            </td>
+
+            <td>
+                @{
+                    DateTime ngayLamViec = (DateTime)item.NGAYLAMVIEC;
+                    string formattedDateNGAYLAMVIEC = ngayLamViec.ToString("dd/MM/yyyy");
+                }
+                @formattedDateNGAYLAMVIEC
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SLNHANVIEN)
+            </td>
+
+
+
+
+        </tr>
+    }
+</table>
+@{
+    var ngayIn = " ngày " + DateTime.Now.Day.ToString() + " tháng " + DateTime.Now.Month.ToString() + " năm " + DateTime.Now.Year.ToString();
+}
+<table id='tb_footer' name='tb_footer' width='700' border="0" class="fixheader">
+    <tr>
+        <td align='left' width='30%'></td>
+        <td align='center' width='30%'></td>
+        <td align='center' class='sign italic'>
+            Khánh Hòa, @ngayIn
+        </td>
+    </tr>
+    <tr>
+        <td align='center' width='30%' class='bold'>Giám đốc</td>
+        <td align='center' width='30%' class='bold'></td>
+        <td align='center' class='bold'>Người lập danh sách</td>
+    </tr>
+</table>
+
+
+
+
+<style>
+    table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 700px;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .italic {
+        font-style: italic;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .fixheader {
+        position: relative;
+    }
+
+        .fixheader td {
+            position: relative;
+        }
+
+    .sign {
+        font-style: italic;
+    }
+</style>

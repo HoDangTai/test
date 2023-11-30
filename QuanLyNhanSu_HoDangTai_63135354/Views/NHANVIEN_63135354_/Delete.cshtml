@@ -1,0 +1,75 @@
+﻿@model QuanLyNhanSu_HoDangTai_63135354.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "Delete";
+    var gioiTinh = "Nữ";
+}
+
+<style>
+    .red {
+        color: red;
+    }
+
+    .boxConfirm {
+        width: 400px;
+        height: 270px;
+        margin-top: 20px;
+    }
+
+        .boxConfirm > .imageContent {
+            float: left;
+            width: 30%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .boxConfirm > .imageContent > img {
+                width: 80%;
+                height: 50%;
+                border-radius: 50%;
+            }
+
+        .boxConfirm > .content {
+            float: left;
+            width: 70%;
+            height: 100%;
+        }
+</style>
+
+<h3>Bạn có muốn xóa nhân viên</h3>
+
+<div class="boxConfirm">
+    <h4><b>THÔNG TIN CHI TIẾT</b></h4>
+    <hr />
+    <div class="imageContent">
+        <img src="~/Images/@Html.DisplayFor(model=>model.ANHNV)" alt="...." />
+    </div>
+    <div id="content">
+        <div>Mã nhân viên: @Html.DisplayFor(model => model.MANV)</div>
+        <div>Họ nhân viên: @Html.DisplayFor(model => model.HONV)</div>
+        <div>Tên nhân viên: @Html.DisplayFor(model => model.TENNV)</div>
+        <div>
+            Giới tính: @{
+                if (ViewBag.Gendar == false)
+                {
+                    gioiTinh = "Nữ";
+                }
+            }@gioiTinh
+        </div>
+        <div>Ngày sinh: @Html.DisplayFor(model => model.NGAYSINH)</div>
+        <div>Số điện thoại: @Html.DisplayFor(model => model.SDT)</div>
+        <div>Email: @Html.DisplayFor(model => model.EMAIL)</div>
+        <div>Ngày vào làm: @Html.DisplayFor(model => model.NGAYVAOLAM)</div>
+        <div>CCCD: @Html.DisplayFor(model => model.CCCD)</div>
+        <div>Chức vụ: @Html.DisplayFor(model => model.CHUCVU.TENCV)</div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <input type="submit" value="Xoá" class="btn btn-default" /> |
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+        }

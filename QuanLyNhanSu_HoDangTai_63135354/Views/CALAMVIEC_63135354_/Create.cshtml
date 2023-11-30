@@ -1,0 +1,118 @@
+﻿@model QuanLyNhanSu_HoDangTai_63135354.Models.CALAMVIEC
+
+@{
+    ViewBag.Title = "Create";
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dropdown = document.getElementById("caLamViec");
+        var thoiGianBatDau = document.getElementById("thoiGianBatDau");
+        var thoiGianKetThuc = document.getElementById("thoiGianKetThuc");
+
+        dropdown.addEventListener("change", function () {
+            var selectedValue = this.value;
+
+            switch (selectedValue) {
+                case "Ca sáng":
+                    thoiGianBatDau.value = "08:00:00";
+                    thoiGianKetThuc.value = "11:30:00";
+                    break;
+                case "Ca chiều":
+                    thoiGianBatDau.value = "14:00:00";
+                    thoiGianKetThuc.value = "17:30:00";
+                    break;
+                case "Ca tối":
+                    thoiGianBatDau.value = "17:30:00";
+                    thoiGianKetThuc.value = "21:30:00";
+                    break;
+                default:
+                    thoiGianBatDau.value = "";
+                    thoiGianKetThuc.value = "";
+                    break;
+            }
+        });
+
+        // Trigger the change event to update the values on page load
+        dropdown.dispatchEvent(new Event("change"));
+    });
+</script>
+<h2>Thêm thông tin ca làm việc</h2>
+
+@using (Html.BeginForm("Create", "CALAMVIEC_63135354_", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.MACA, "Mã Ca Làm Việc:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MACA, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @placeholder = @ViewBag.maCa } })
+                @Html.ValidationMessageFor(model => model.MACA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MOTACALAMVIEC, "Mô Tả Ca Làm Việc", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*                @Html.EditorFor(model => model.MOTACALAMVIEC, new { htmlAttributes = new { @name = "caLamViec", @id = "caLamViec", @class = "form-control" } })
+                *@
+                @Html.DropDownListFor(model => model.MOTACALAMVIEC, new SelectList(new[] {
+                     new SelectListItem { Text = "Ca Sáng", Value = "Ca sáng" },
+                     new SelectListItem { Text = "Ca Chiều", Value = "Ca chiều" },
+                     new SelectListItem { Text = "Ca Tối", Value = "Ca tối" }
+                 }, "Value", "Text"), new { @class = "form-control", @id = "caLamViec" })
+
+
+
+                @Html.ValidationMessageFor(model => model.MOTACALAMVIEC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TGBATDAU, "Vào Ca:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TGBATDAU, new { htmlAttributes = new { @name = "thoiGianBatDau", @readonly = "readonly", @id = "thoiGianBatDau", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TGBATDAU, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TGKETTHUC, "Tan Ca:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TGKETTHUC, new { htmlAttributes = new { @name = "thoiGianKetThuc", @readonly = "readonly", @id = "thoiGianKetThuc", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TGKETTHUC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NGAYLAMVIEC, "Ngày Làm Việc:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NGAYLAMVIEC, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NGAYLAMVIEC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SLNHANVIEN, "Số Lượng Nhân Viên", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SLNHANVIEN, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SLNHANVIEN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Tạo" class="btn btn-primary" />
+                @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

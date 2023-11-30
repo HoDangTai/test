@@ -1,0 +1,257 @@
+﻿@model List<QuanLyNhanSu_HoDangTai_63135354.Models.NHANVIEN>
+
+@{
+    ViewBag.Title = "TimKiem_63135354";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "TenNV", rowsPerPage: 2);
+    @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
+}
+
+
+
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: Calibri, sans-serif;
+        }
+
+        h3 {
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .grid-footer {
+            color: #000;
+            font: 17px Calibri;
+            text-align: center;
+            font-weight: bold;
+        }
+
+            .grid-footer a {
+                background-color: #ffffff;
+                color: blue;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                padding: 5px 15px;
+                text-decoration: none;
+                border-radius: 4px;
+            }
+
+                .grid-footer a:active,
+                .grid-footer a:hover {
+                    background-color: #ffffff;
+                    color: #FFAD33;
+                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                }
+
+        .alternatingRowStyle {
+            background-color: #f2f2f2;
+        }
+
+        .table1 {
+            text-align: left;
+            margin: 30px auto;
+            width: 800px;
+        }
+
+        input[type="text"],
+        input[type="radio"] {
+            margin-left: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .dropdown {
+            margin-left: 5px;
+        }
+
+        input[type="submit"],
+        input[type="button"] {
+            margin-top: 10px;
+            margin-left: 5px;
+            background-color: blue;
+            color: white;
+            padding: 5px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            margin-right: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+            .edit-btn img {
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+            }
+
+        table {
+            margin-top: 30px;
+        }
+
+        .webgrid-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("TimKiem_63135354", "NHANVIEN_63135354_", FormMethod.Get))
+        {
+            @Html.AntiForgeryToken()
+
+            <table class="table1" align="center">
+                <tr>
+                    <td>
+                        <div> Mã nhân viên</div>
+                    </td>
+                    <td>
+                        <input type="text" name="maNV" value="@ViewBag.maNV" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Họ tên</td>
+                    <td>
+                        <input type="text" name="hoTen" value="@ViewBag.hoTen" />
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>Giới tính</td>
+                    <td>
+                        @if (@ViewBag.gioiTinh == null)
+                        {
+                            <input type="radio" name="gioiTinh" value="1" /><text>Nam</text>
+                            <input type="radio" name="gioiTinh" value="0" /><text>Nữ</text>
+                        }
+                        else if (@ViewBag.gioiTinh == "1")
+                        {
+                            <input type="radio" name="gioiTinh" checked value="1" /><text>Nam</text>
+                            <input type="radio" name="gioiTinh" value="0" /><text>Nữ</text>
+                        }
+                        else
+                        {
+                            <input type="radio" name="gioiTinh" value="1" /><text>Nam</text>
+                            <input type="radio" name="gioiTinh" checked value="0" /><text>Nữ</text>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Địa chỉ</td>
+                    <td>
+                        <input type="text" name="diaChi" value="@ViewBag.diaChi" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Số điện thoại</td>
+                    <td>
+                        <input type="text" name="SDT" value="@ViewBag.SDT" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>CCCD</td>
+                    <td>
+                        <input type="text" name="CCCD" value="@ViewBag.CCCD" />
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>Chức vụ</td>
+                    <td>
+                        @Html.DropDownList("MaCV", null, "Tất cả", htmlAttributes: new { @class = "form-control dropdown" })
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" class="btn btn-primary" name="submit" value="Tìm kiếm" style="margin-left: 5px;
+                background-color: blue;color:white" />
+                        <input type="button" class="btn btn-primary" name="Nhapmoi" value="Nhập mới" style="margin-left: 5px;
+                background-color: blue;color:white" onclick="location.href='@Url.Action("TimKiem_63135354", "NHANVIEN_63135354_/TimKiem_63135354")'" />
+
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+
+    <div id="gridContent">
+        @ViewBag.TB
+        @grid.GetHtml(
+            tableStyle: "table table-bordered table-hover",
+            footerStyle: "grid-footer",
+            fillEmptyRows: true,
+            mode: WebGridPagerModes.Numeric,
+            alternatingRowStyle: "alternatingRowStyle",
+              columns: new[]  // colums in grid
+             {
+                grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+                grid.Column("MANV","Mã nhân viên"), //the model fields to display
+
+                grid.Column("HONV","Họ nhân viên"  ),
+                grid.Column("TENLOT","Tên lót"  ),
+
+                grid.Column("TENNV","Tên nhân viên"),
+                grid.Column("GIOITINH","Giới tính",format: (@item) => @item.GIOITINH==true?"Nam":"Nữ"),
+                grid.Column("NGAYSINH","Ngày sinh",format:@<text> @item.NGAYSINH.ToString("dd/MM/yyyy")</text>),
+grid.Column("DIACHI","Địa chỉ"),
+
+grid.Column("SDT","Số điện thoại"),
+grid.Column("EMAIL","Email"),
+grid.Column("NGAYVAOLAM","Ngày vào làm",format:@<text> @item.NGAYSINH.ToString("dd/MM/yyyy")</text>),
+
+grid.Column("CCCD","CCCD"),
+grid.Column("ANHNV","Ảnh nhân viên"),
+grid.Column("CHUCVU.TENCV","Chức vụ"),
+// @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaNV })
+/*grid.Column(format: (item) => Html.ActionLink("Cập nhật", "Edit",new { id = item.MaNV })),
+grid.Column(format: (item) => Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaNV })),
+grid.Column(format: (item) => Html.ActionLink("Xóa", "Delete", new { id = item.MaNV })),*/
+grid.Column("Chức năng", format: @<text>
+    <a href="@Url.Action("Edit",new { id = item.MANV})" class="edit-btn">
+        <abbr title="Cập nhật dữ liệu"><img src="/images_res/edit.png" width="20" height="20" /></abbr>
+    </a>
+    <a href="@Url.Action("Details",
+                        new { id = item.MANV})" class="edit-btn"><abbr title="Xem chi tiết"><img src="~/images_res/details.png" width="20" height="20" /></abbr></a>
+    <a href="@Url.Action("Delete",
+                        new { id = item.MANV})" class="edit-btn">
+        <abbr title="Xóa dữ liệu">
+            <img src="/images_res/delete.png" width="20" height="20" />
+        </abbr>
+    </a>
+</text>),
+
+}
+)
+    </div>
+</body>
+</html>
+

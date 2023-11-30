@@ -1,0 +1,91 @@
+﻿@model QuanLyNhanSu_HoDangTai_63135354.Models.CALAMVIEC
+@{
+    ViewBag.Title = "Delete";
+}
+
+@*
+
+    <div class="boxConfirm">
+        <h4><b>CA LÀM VIỆC</b></h4>
+        <hr />
+        <div id="content">
+            <div>Mã ca: @Html.DisplayFor(model => model.MACA)</div>
+            <div>Mô tả ca làm việc: @Html.DisplayFor(model => model.MOTACALAMVIEC)</div>
+            <div>Thời gian bắt đầu: @Html.DisplayFor(model => model.TGBATDAU)</div>
+            <div>Thời gian kết thúc: @Html.DisplayFor(model => model.TGKETTHUC)</div>
+            <div>Ngày làm việc: @Html.DisplayFor(model => model.NGAYLAMVIEC)</div>
+            <div>Số lượng nhân viên @Html.DisplayFor(model => model.SLNHANVIEN)</div>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <input type="submit" value="Xoá" class="btn btn-default" /> |
+                    @Html.ActionLink("Quay lại", "Index")
+                </div>
+            }
+        </div>
+    </div>*@
+
+
+
+
+<div>
+    <h3>BẠN CÓ MUỐN XÓA CA LÀM VIỆC KHÔNG?</h3>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã ca:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MACA)
+        </dd>
+        <dt>
+            Mô tả ca làm việc:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MOTACALAMVIEC)
+        </dd>
+        <dt>
+            Mô tả ca làm việc:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MOTACALAMVIEC)
+        </dd>
+
+        <dt>
+            Thời gian bắt đầu
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TGBATDAU)
+        </dd>
+
+        <dt>
+            Thời gian kết thúc
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TGKETTHUC)
+        </dd>
+
+        <dt>
+            Ngày làm việc
+        </dt>
+
+        @{
+            DateTime ngayLamViec = (DateTime)Model.NGAYLAMVIEC;
+            string formattedDate = ngayLamViec.ToString("dd/MM/yyyy");
+        }
+        <dd>
+            @formattedDate
+        </dd>
+
+    </dl>
+</div>  @using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-actions no-color">
+        <input type="submit" value="Xoá" class="btn btn-default" /> |
+        @Html.ActionLink("Quay lại", "Index")
+    </div>
+}

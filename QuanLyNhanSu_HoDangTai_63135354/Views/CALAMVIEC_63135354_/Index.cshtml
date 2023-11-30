@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "MACA", rowsPerPage: 2);
+
+}
+<style type="text/css">
+    .grid-footer {
+        color: #000;
+        font: 17px Calibri;
+        text-align: center;
+        font-weight: bold;
+    }
+
+        .grid-footer a {
+            background-color: #ffffff;
+            color: blue;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            padding: 1px 10px 2px 10px;
+            text-decoration: none; /* Added to remove underline on hover */
+        }
+
+            .grid-footer a:active,
+            .grid-footer a:hover {
+                background-color: #ffffff;
+                color: #FFAD33;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            }
+
+    .alternatingRowStyle {
+        background-color: #f2f2f2; /* Use a light gray for alternating rows */
+    }
+
+    table.table1 {
+        text-align: left;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .edit-btn {
+        margin-right: 5px;
+        text-decoration: none;
+        color: #333;
+    }
+</style>
+
+
+<h3>DANH SÁCH CA LÀM VIỆC</h3>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+
+<div id="gridContent">
+    @ViewBag.TB
+    @grid.GetHtml(
+        tableStyle: "table table-bordered table-hover",
+        footerStyle: "grid-footer",
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.Numeric,
+        alternatingRowStyle: "alternatingRowStyle",
+          columns: new[]  // colums in grid
+         {
+          grid.Column("MACA","Mã ca"), //the model fields to display
+
+            grid.Column("MOTACALAMVIEC","Mô tả ca làm việc"), //the model fields to display
+            grid.Column("TGBATDAU","Thời gian bắt đầu"),
+                       grid.Column("TGKETTHUC", "Thời gian kết thúc"),
+
+grid.Column("NGAYLAMVIEC","Ngày làm việc",format:@<text> @item.NGAYLAMVIEC.ToString("dd/MM/yyyy")</text>),
+
+grid.Column("SLNHANVIEN","Số lượng nhân viên"),
+
+/*grid.Column(format: (item) => Html.ActionLink("Cập nhật", "Edit",new { id = item.MACA })),
+grid.Column(format: (item) => Html.ActionLink("Xem chi tiết", "Details", new { id = item.MACA })),
+grid.Column(format: (item) => Html.ActionLink("Xóa", "Delete", new { id = item.MACA })),*/
+grid.Column("Chức năng", format: @<text>
+    <a href="@Url.Action("Edit","CALAMVIEC_63135354_",new { id = item.MACA})" class="edit-btn">
+        <abbr title="Cập nhật dữ liệu"><img src="~/images_res/edit.png" width="20" height="20" /></abbr>
+    </a>
+    <a href="@Url.Action("Details",
+                new { id = item.MACA})" class="edit-btn"><abbr title="Xem chi tiết"><img src="~/images_res/details.png" width="20" height="20" /></abbr></a>
+    <a href="@Url.Action("Delete",
+                new { id = item.MACA})" class="edit-btn">
+        <abbr title="Xóa dữ liệu">
+            <img src="~/images_res/delete.png" width="20" height="20" />
+        </abbr>
+    </a>
+</text>),
+
+}
+)
+</div>

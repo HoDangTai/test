@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="12ebbb35c1774cab996898053843a4df" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="QuanlynhansuChampaIslandModel.CALAMVIEC" Width="1.5" PointX="14.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanlynhansuChampaIslandModel.CHAMCONG" Width="1.5" PointX="9.625" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanlynhansuChampaIslandModel.CHUCVU" Width="1.5" PointX="9.625" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanlynhansuChampaIslandModel.LUONG" Width="1.5" PointX="14.375" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanlynhansuChampaIslandModel.NHANVIEN" Width="1.5" PointX="12.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanlynhansuChampaIslandModel.PHANCONG" Width="1.5" PointX="16.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanlynhansuChampaIslandModel.QUANTRI" Width="1.5" PointX="16.75" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="QuanlynhansuChampaIslandModel.FK__CHAMCONG__MACA__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanlynhansuChampaIslandModel.FK__PHANCONG__MACA__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanlynhansuChampaIslandModel.FK__CHAMCONG__MANV__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanlynhansuChampaIslandModel.FK__NHANVIEN__MACV__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanlynhansuChampaIslandModel.FK__LUONG__MANV__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanlynhansuChampaIslandModel.FK__PHANCONG__MANV__5BE2A6F2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

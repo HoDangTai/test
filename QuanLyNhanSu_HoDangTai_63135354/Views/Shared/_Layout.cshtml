@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .dropdown-menu {
+            background-color: white;
+        }
+
+        dropdown-menu > li {
+            padding: 5px;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                *@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="dropdown">
+                        @Html.ActionLink("Chức vụ", "", "", null, new { @class = "dropdown-toggle", data_toggle = "dropdown", role = "button", aria_haspopup = "true", aria_expanded = "false" })
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Danh sách Chức vụ", "Index", "CHUCVU_63135354_")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        @Html.ActionLink("Nhân viên", "", "", null, new { @class = "dropdown-toggle", data_toggle = "dropdown", role = "button", aria_haspopup = "true", aria_expanded = "false" })
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Danh sách nhân viên", "Index", "NHANVIEN_63135354_")</li>
+                            <li>@Html.ActionLink("Tra cứu thông tin nhân viên", "TimKiem_63135354", "NHANVIEN_63135354_")</li>
+                            <li>@Html.ActionLink("In danh sách nhân viên", "InDanhSachNhanVien_63135354", "NHANVIEN_63135354_")</li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        @Html.ActionLink("Ca làm việc", "", "", null, new { @class = "dropdown-toggle", data_toggle = "dropdown", role = "button", aria_haspopup = "true", aria_expanded = "false" })
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Danh sách Ca làm việc", "Index", "CALAMVIEC_63135354_")</li>
+                            <li>@Html.ActionLink("Tra cứu thông tin ca làm việc", "TimKiem_63135354", "CALAMVIEC_63135354_")</li>
+                            <li>@Html.ActionLink("In danh sách ca làm việc", "InDanhSachCaLamViec_63135354", "CALAMVIEC_63135354_")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        @Html.ActionLink("Phân công", "", "", null, new { @class = "dropdown-toggle", data_toggle = "dropdown", role = "button", aria_haspopup = "true", aria_expanded = "false" })
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Danh sách phân công", "Index", "PHANCONG_63135354_")</li>
+                            @*                            <li>@Html.ActionLink("Tra cứu thông tin nhân viên", "DanhSachNhanVien", "NHANVIEN_63135354")</li>
+                            *@
+                            @*                            <li>@Html.ActionLink("In danh sách nhân viên", "InDanhSachNhanVien", "NHANVIEN_63135354")</li>
+                            *@
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

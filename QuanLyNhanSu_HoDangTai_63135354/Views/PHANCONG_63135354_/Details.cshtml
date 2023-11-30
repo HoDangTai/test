@@ -1,0 +1,53 @@
+﻿@model QuanLyNhanSu_HoDangTai_63135354.Models.PHANCONG
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Thông tin chi tiết</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã phân công:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAPC)
+        </dd>
+        <dt>
+            Mã ca:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MACA)
+        </dd>
+        <dt>
+            Mô tả ca làm việc:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CALAMVIEC.MOTACALAMVIEC)
+        </dd>
+
+        <dt>
+            Mã nhân viên
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHANVIEN.MANV)
+        </dd>
+        <dt>
+            Mã chức vụ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHANVIEN.CHUCVU.TENCV)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Trở lại", "Index")
+</p>

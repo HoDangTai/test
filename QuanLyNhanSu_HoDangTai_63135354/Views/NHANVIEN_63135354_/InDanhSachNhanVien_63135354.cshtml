@@ -1,0 +1,162 @@
+﻿@model IEnumerable<QuanLyNhanSu_HoDangTai_63135354.Models.NHANVIEN>
+
+@{
+    ViewBag.Title = "InDanhSachNhanVien_63135354";
+    string gtinh = "";
+    int i = 0;
+}
+
+
+
+<title>Bản in</title>
+<table style="margin-top: 60px; border-collapse: collapse;" width='700'>
+    <tr>
+        <th align='left'>
+            NHÀ HÀNG CHAMPA ISLAND
+        </th>
+    </tr>
+    <tr>
+        <th align='center' style='height:35px'>
+            DANH SÁCH NHÂN SỰ
+        </th>
+    </tr>
+</table>
+<br />
+<table id='tb_main_body' style='border-collapse: collapse;' name='tb_main_body' class="table-print" border="1">
+    <tr>
+        <th>
+            STT
+        </th>
+        <th>
+            Mã NV
+        </th>
+        <th>
+            Họ nhân viên
+        </th>
+        <th>
+            Tên lót
+        </th>
+        <th>
+            Tên nhân viên
+        </th>
+        <th align="center">
+            Giới tính
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Ngày sinh
+        </th>
+        <th>
+            Ngày vào làm
+        </th>
+        <th>
+            CCCD
+        </th>
+        <th>
+            Ảnh nhân viên
+        </th>
+        <th>
+            Chức vụ
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @{i++;}
+                @i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MANV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HONV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TENLOT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TENNV)
+            </td>
+            <td align="center">
+                @{if (item.GIOITINH == true)
+                    { gtinh = "Nam"; }
+                    else
+                    { gtinh = "Nữ"; }
+                }
+                @gtinh
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DIACHI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMAIL)
+            </td>
+            <td>
+                @{
+                    DateTime ngaySinh = (DateTime)item.NGAYSINH;
+                    string formattedDateNGAYSINH = ngaySinh.ToString("dd/MM/yyyy");
+                }  @formattedDateNGAYSINH
+            </td>
+            <td>
+                @{
+                    DateTime ngayLamViec = (DateTime)item.NGAYVAOLAM;
+                    string formattedDateNGAYLAMVIEC = ngayLamViec.ToString("dd/MM/yyyy");
+                }
+                @formattedDateNGAYLAMVIEC
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CCCD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ANHNV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHUCVU.TENCV)
+            </td>
+        </tr>
+    }
+</table>
+@{
+    var ngayIn = " ngày " + DateTime.Now.Day.ToString() + " tháng " + DateTime.Now.Month.ToString() + " năm " + DateTime.Now.Year.ToString();
+}
+<table id='tb_footer' name='tb_footer' width='700' border="0" class="fixheader">
+    <tr>
+        <td align='left' width='30%'></td>
+        <td align='center' width='30%'></td>
+        <td align='center' class='sign italic'>
+            Khánh Hòa, @ngayIn
+        </td>
+    </tr>
+    <tr>
+        <td align='center' width='30%' class='bold'>Giám đốc</td>
+        <td align='center' width='30%' class='bold'></td>
+        <td align='center' class='bold'>Người lập danh sách</td>
+    </tr>
+</table>
+
+
+
+
+<style>
+    table {
+        margin: 0 auto;
+    }
+
+        table > tr > th, td {
+            width: 200px;
+            text-align: center;
+        }
+</style>

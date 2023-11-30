@@ -1,0 +1,132 @@
+﻿@model IEnumerable<QuanLyNhanSu_HoDangTai_63135354.Models.PHANCONG>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "TenNV", rowsPerPage: 2);
+
+}
+<style type="text/css">
+    body {
+        font-family: Calibri, sans-serif;
+    }
+
+    h2 {
+        color: #333;
+        text-align: center;
+    }
+
+    p {
+        text-align: right;
+        margin-bottom: 10px;
+    }
+
+    .grid-footer {
+        color: #000;
+        font: 17px Calibri;
+        text-align: center;
+        font-weight: bold;
+    }
+
+        .grid-footer a {
+            background-color: #ffffff;
+            color: blue;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 5px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+            .grid-footer a:active,
+            .grid-footer a:hover {
+                background-color: #ffffff;
+                color: #FFAD33;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            }
+
+    .alternatingRowStyle {
+        background-color: #f2f2f2;
+    }
+
+    .table1 {
+        text-align: left;
+        margin: 30px auto;
+        width: 800px;
+    }
+
+    .edit-btn {
+        margin-right: 5px;
+        text-decoration: none;
+        color: #333;
+    }
+
+        .edit-btn img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+    table {
+        margin-top: 30px;
+    }
+
+    .webgrid-table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+
+
+<h2>DANH SÁCH PHÂN CÔNG</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+
+<div id="gridContent">
+    @ViewBag.TB
+    @grid.GetHtml(
+        tableStyle: "table table-bordered table-hover",
+        footerStyle: "grid-footer",
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.Numeric,
+        alternatingRowStyle: "alternatingRowStyle",
+          columns: new[]  // colums in grid
+         {
+              grid.Column("MAPC","Phân công"),
+            grid.Column("CALAMVIEC.MOTACALAMVIEC","Phân công ca làm việc"), //the model fields to display
+            grid.Column("MANV","Nhân viên được phân công"),
+            grid.Column(format: (item) => Html.ActionLink("Cập nhật", "Edit",new { id = item.MAPC, id1 = item.MACA, id2 = item.MANV })),
+            grid.Column(format: (item) => Html.ActionLink("Xem chi tiết", "Details", new { id = item.MAPC, id1 = item.MACA, id2 = item.MANV })),
+            grid.Column(format: (item) => Html.ActionLink("Xóa", "Delete", new { id = item.MAPC, id1 = item.MACA, id2 = item.MANV })),
+
+            grid.Column("Chức năng", format: @<text>
+
+    <a href="@Url.Action("Edit","PHANCONG_63135354_",new { id = item.MAPC, id1 = item.MACA, id2 = item.MANV})" class="edit-btn">
+        <abbr title="Cập nhật dữ liệu"><img src="~/images_res/edit.png" width="20" height="20" /></abbr>
+    </a>
+    <a href="@Url.Action("Details",
+        new { id = item.MAPC, id1 = item.MACA, id2 = item.MANV})" class="edit-btn"><abbr title="Xem chi tiết"><img src="~/images_res/details.png" width="20" height="20" /></abbr></a>
+    <a href="@Url.Action("Delete",
+        new { id = item.MAPC, id1 = item.MACA, id2 = item.MANV})" class="edit-btn">
+        <abbr title="Xóa dữ liệu">
+            <img src="~/images_res/delete.png" width="20" height="20" />
+        </abbr>
+    </a>
+            </text>),
+
+}
+)
+</div>

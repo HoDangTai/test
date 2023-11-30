@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuanlynhansuChampaIslandModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CALAMVIEC">
+          <Key>
+            <PropertyRef Name="MACA" />
+          </Key>
+          <Property Name="MACA" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="MOTACALAMVIEC" Type="nvarchar" MaxLength="50" />
+          <Property Name="TGBATDAU" Type="time" Precision="7" />
+          <Property Name="TGKETTHUC" Type="time" Precision="7" />
+          <Property Name="NGAYLAMVIEC" Type="date" />
+          <Property Name="SLNHANVIEN" Type="int" />
+        </EntityType>
+        <EntityType Name="CHAMCONG">
+          <Key>
+            <PropertyRef Name="MACHAMCONG" />
+          </Key>
+          <Property Name="MACHAMCONG" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="MANV" Type="varchar" MaxLength="6" />
+          <Property Name="THANG" Type="varchar" MaxLength="2" />
+          <Property Name="NAM" Type="varchar" MaxLength="4" />
+          <Property Name="NGAYLAMVIEC" Type="date" />
+          <Property Name="MACA" Type="varchar" MaxLength="6" />
+          <Property Name="TT" Type="bit" />
+        </EntityType>
+        <EntityType Name="CHUCVU">
+          <Key>
+            <PropertyRef Name="MACV" />
+          </Key>
+          <Property Name="MACV" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="TENCV" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LUONG">
+          <Key>
+            <PropertyRef Name="MALUONG" />
+          </Key>
+          <Property Name="MALUONG" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="MANV" Type="varchar" MaxLength="6" />
+          <Property Name="THANG" Type="varchar" MaxLength="2" />
+          <Property Name="NAM" Type="varchar" MaxLength="4" />
+          <Property Name="LUONGCOBAN" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PHUCAP" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="LUONGTONG" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Name="MANV" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="MACV" Type="varchar" MaxLength="2" />
+          <Property Name="HONV" Type="nvarchar" MaxLength="20" />
+          <Property Name="TENLOT" Type="nvarchar" MaxLength="20" />
+          <Property Name="TENNV" Type="nvarchar" MaxLength="20" />
+          <Property Name="NGAYSINH" Type="date" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
+          <Property Name="GIOITINH" Type="bit" />
+          <Property Name="SDT" Type="varchar" MaxLength="10" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="NGAYVAOLAM" Type="date" />
+          <Property Name="CCCD" Type="varchar" MaxLength="13" />
+          <Property Name="ANHNV" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PHANCONG">
+          <Key>
+            <PropertyRef Name="MAPC" />
+            <PropertyRef Name="MACA" />
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Name="MAPC" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="MACA" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="MANV" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QUANTRI">
+          <Key>
+            <PropertyRef Name="EMAIL" />
+          </Key>
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ADMIN" Type="binary" MaxLength="2" />
+          <Property Name="HoTen" Type="varchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__CHAMCONG__MACA__571DF1D5">
+          <End Role="CALAMVIEC" Type="Self.CALAMVIEC" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CHAMCONG" Type="Self.CHAMCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CALAMVIEC">
+              <PropertyRef Name="MACA" />
+            </Principal>
+            <Dependent Role="CHAMCONG">
+              <PropertyRef Name="MACA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CHAMCONG__MANV__5629CD9C">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CHAMCONG" Type="Self.CHAMCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="CHAMCONG">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LUONG__MANV__5165187F">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LUONG" Type="Self.LUONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="LUONG">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NHANVIEN__MACV__4D94879B">
+          <End Role="CHUCVU" Type="Self.CHUCVU" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCVU">
+              <PropertyRef Name="MACV" />
+            </Principal>
+            <Dependent Role="NHANVIEN">
+              <PropertyRef Name="MACV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHANCONG__MACA__5AEE82B9">
+          <End Role="CALAMVIEC" Type="Self.CALAMVIEC" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PHANCONG" Type="Self.PHANCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CALAMVIEC">
+              <PropertyRef Name="MACA" />
+            </Principal>
+            <Dependent Role="PHANCONG">
+              <PropertyRef Name="MACA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHANCONG__MANV__5BE2A6F2">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PHANCONG" Type="Self.PHANCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="PHANCONG">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CaLamViec_TimKiemNC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaCA" Type="varchar" Mode="In" />
+          <Parameter Name="MOTA" Type="nvarchar" Mode="In" />
+          <Parameter Name="NGAYLAMVIEC" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="NhanVien_TimKiemNC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+          <Parameter Name="HoTen" Type="nvarchar" Mode="In" />
+          <Parameter Name="GioiTinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="SDT" Type="varchar" Mode="In" />
+          <Parameter Name="CCCD" Type="varchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="MaCV" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="QuanlynhansuChampaIslandModelStoreContainer">
+          <EntitySet Name="CALAMVIEC" EntityType="Self.CALAMVIEC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHAMCONG" EntityType="Self.CHAMCONG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHUCVU" EntityType="Self.CHUCVU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUONG" EntityType="Self.LUONG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHANCONG" EntityType="Self.PHANCONG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUANTRI" EntityType="Self.QUANTRI" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CHAMCONG__MACA__571DF1D5" Association="Self.FK__CHAMCONG__MACA__571DF1D5">
+            <End Role="CALAMVIEC" EntitySet="CALAMVIEC" />
+            <End Role="CHAMCONG" EntitySet="CHAMCONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CHAMCONG__MANV__5629CD9C" Association="Self.FK__CHAMCONG__MANV__5629CD9C">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="CHAMCONG" EntitySet="CHAMCONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LUONG__MANV__5165187F" Association="Self.FK__LUONG__MANV__5165187F">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="LUONG" EntitySet="LUONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NHANVIEN__MACV__4D94879B" Association="Self.FK__NHANVIEN__MACV__4D94879B">
+            <End Role="CHUCVU" EntitySet="CHUCVU" />
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHANCONG__MACA__5AEE82B9" Association="Self.FK__PHANCONG__MACA__5AEE82B9">
+            <End Role="CALAMVIEC" EntitySet="CALAMVIEC" />
+            <End Role="PHANCONG" EntitySet="PHANCONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHANCONG__MANV__5BE2A6F2" Association="Self.FK__PHANCONG__MANV__5BE2A6F2">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="PHANCONG" EntitySet="PHANCONG" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanlynhansuChampaIslandModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CALAMVIEC">
+          <Key>
+            <PropertyRef Name="MACA" />
+          </Key>
+          <Property Name="MACA" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MOTACALAMVIEC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TGBATDAU" Type="Time" Precision="7" />
+          <Property Name="TGKETTHUC" Type="Time" Precision="7" />
+          <Property Name="NGAYLAMVIEC" Type="DateTime" Precision="0" />
+          <Property Name="SLNHANVIEN" Type="Int32" />
+          <NavigationProperty Name="CHAMCONGs" Relationship="Self.FK__CHAMCONG__MACA__571DF1D5" FromRole="CALAMVIEC" ToRole="CHAMCONG" />
+          <NavigationProperty Name="PHANCONGs" Relationship="Self.FK__PHANCONG__MACA__5AEE82B9" FromRole="CALAMVIEC" ToRole="PHANCONG" />
+        </EntityType>
+        <EntityType Name="CHAMCONG">
+          <Key>
+            <PropertyRef Name="MACHAMCONG" />
+          </Key>
+          <Property Name="MACHAMCONG" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MANV" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="THANG" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="NAM" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="NGAYLAMVIEC" Type="DateTime" Precision="0" />
+          <Property Name="MACA" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="TT" Type="Boolean" />
+          <NavigationProperty Name="CALAMVIEC" Relationship="Self.FK__CHAMCONG__MACA__571DF1D5" FromRole="CHAMCONG" ToRole="CALAMVIEC" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__CHAMCONG__MANV__5629CD9C" FromRole="CHAMCONG" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="CHUCVU">
+          <Key>
+            <PropertyRef Name="MACV" />
+          </Key>
+          <Property Name="MACV" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TENCV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NHANVIENs" Relationship="Self.FK__NHANVIEN__MACV__4D94879B" FromRole="CHUCVU" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="LUONG">
+          <Key>
+            <PropertyRef Name="MALUONG" />
+          </Key>
+          <Property Name="MALUONG" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MANV" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="THANG" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="NAM" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="LUONGCOBAN" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PHUCAP" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="LUONGTONG" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__LUONG__MANV__5165187F" FromRole="LUONG" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Name="MANV" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MACV" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="HONV" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TENLOT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TENNV" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NGAYSINH" Type="DateTime" Precision="0" />
+          <Property Name="DIACHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GIOITINH" Type="Boolean" />
+          <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NGAYVAOLAM" Type="DateTime" Precision="0" />
+          <Property Name="CCCD" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="ANHNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CHAMCONGs" Relationship="Self.FK__CHAMCONG__MANV__5629CD9C" FromRole="NHANVIEN" ToRole="CHAMCONG" />
+          <NavigationProperty Name="CHUCVU" Relationship="Self.FK__NHANVIEN__MACV__4D94879B" FromRole="NHANVIEN" ToRole="CHUCVU" />
+          <NavigationProperty Name="LUONGs" Relationship="Self.FK__LUONG__MANV__5165187F" FromRole="NHANVIEN" ToRole="LUONG" />
+          <NavigationProperty Name="PHANCONGs" Relationship="Self.FK__PHANCONG__MANV__5BE2A6F2" FromRole="NHANVIEN" ToRole="PHANCONG" />
+        </EntityType>
+        <EntityType Name="PHANCONG">
+          <Key>
+            <PropertyRef Name="MAPC" />
+            <PropertyRef Name="MACA" />
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Name="MAPC" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MACA" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MANV" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CALAMVIEC" Relationship="Self.FK__PHANCONG__MACA__5AEE82B9" FromRole="PHANCONG" ToRole="CALAMVIEC" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__PHANCONG__MANV__5BE2A6F2" FromRole="PHANCONG" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="QUANTRI">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADMIN" Type="Binary" MaxLength="2" FixedLength="true" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__CHAMCONG__MACA__571DF1D5">
+          <End Role="CALAMVIEC" Type="Self.CALAMVIEC" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CHAMCONG" Type="Self.CHAMCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CALAMVIEC">
+              <PropertyRef Name="MACA" />
+            </Principal>
+            <Dependent Role="CHAMCONG">
+              <PropertyRef Name="MACA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHANCONG__MACA__5AEE82B9">
+          <End Role="CALAMVIEC" Type="Self.CALAMVIEC" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PHANCONG" Type="Self.PHANCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CALAMVIEC">
+              <PropertyRef Name="MACA" />
+            </Principal>
+            <Dependent Role="PHANCONG">
+              <PropertyRef Name="MACA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CHAMCONG__MANV__5629CD9C">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CHAMCONG" Type="Self.CHAMCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="CHAMCONG">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NHANVIEN__MACV__4D94879B">
+          <End Role="CHUCVU" Type="Self.CHUCVU" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCVU">
+              <PropertyRef Name="MACV" />
+            </Principal>
+            <Dependent Role="NHANVIEN">
+              <PropertyRef Name="MACV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LUONG__MANV__5165187F">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LUONG" Type="Self.LUONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="LUONG">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHANCONG__MANV__5BE2A6F2">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PHANCONG" Type="Self.PHANCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="PHANCONG">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanlynhansuChampaIslandEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CALAMVIECs" EntityType="Self.CALAMVIEC" />
+          <EntitySet Name="CHAMCONGs" EntityType="Self.CHAMCONG" />
+          <EntitySet Name="CHUCVUs" EntityType="Self.CHUCVU" />
+          <EntitySet Name="LUONGs" EntityType="Self.LUONG" />
+          <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
+          <EntitySet Name="PHANCONGs" EntityType="Self.PHANCONG" />
+          <EntitySet Name="QUANTRIs" EntityType="Self.QUANTRI" />
+          <AssociationSet Name="FK__CHAMCONG__MACA__571DF1D5" Association="Self.FK__CHAMCONG__MACA__571DF1D5">
+            <End Role="CALAMVIEC" EntitySet="CALAMVIECs" />
+            <End Role="CHAMCONG" EntitySet="CHAMCONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHANCONG__MACA__5AEE82B9" Association="Self.FK__PHANCONG__MACA__5AEE82B9">
+            <End Role="CALAMVIEC" EntitySet="CALAMVIECs" />
+            <End Role="PHANCONG" EntitySet="PHANCONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CHAMCONG__MANV__5629CD9C" Association="Self.FK__CHAMCONG__MANV__5629CD9C">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="CHAMCONG" EntitySet="CHAMCONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NHANVIEN__MACV__4D94879B" Association="Self.FK__NHANVIEN__MACV__4D94879B">
+            <End Role="CHUCVU" EntitySet="CHUCVUs" />
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LUONG__MANV__5165187F" Association="Self.FK__LUONG__MANV__5165187F">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="LUONG" EntitySet="LUONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHANCONG__MANV__5BE2A6F2" Association="Self.FK__PHANCONG__MANV__5BE2A6F2">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="PHANCONG" EntitySet="PHANCONGs" />
+          </AssociationSet>
+          <FunctionImport Name="CaLamViec_TimKiemNC">
+            <Parameter Name="MaCA" Mode="In" Type="String" />
+            <Parameter Name="MOTA" Mode="In" Type="String" />
+            <Parameter Name="NGAYLAMVIEC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NhanVien_TimKiemNC">
+            <Parameter Name="MaNV" Mode="In" Type="String" />
+            <Parameter Name="HoTen" Mode="In" Type="String" />
+            <Parameter Name="GioiTinh" Mode="In" Type="String" />
+            <Parameter Name="SDT" Mode="In" Type="String" />
+            <Parameter Name="CCCD" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="MaCV" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanlynhansuChampaIslandModelStoreContainer" CdmEntityContainer="QuanlynhansuChampaIslandEntities">
+          <EntitySetMapping Name="CALAMVIECs">
+            <EntityTypeMapping TypeName="QuanlynhansuChampaIslandModel.CALAMVIEC">
+              <MappingFragment StoreEntitySet="CALAMVIEC">
+                <ScalarProperty Name="MACA" ColumnName="MACA" />
+                <ScalarProperty Name="MOTACALAMVIEC" ColumnName="MOTACALAMVIEC" />
+                <ScalarProperty Name="TGBATDAU" ColumnName="TGBATDAU" />
+                <ScalarProperty Name="TGKETTHUC" ColumnName="TGKETTHUC" />
+                <ScalarProperty Name="NGAYLAMVIEC" ColumnName="NGAYLAMVIEC" />
+                <ScalarProperty Name="SLNHANVIEN" ColumnName="SLNHANVIEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHAMCONGs">
+            <EntityTypeMapping TypeName="QuanlynhansuChampaIslandModel.CHAMCONG">
+              <MappingFragment StoreEntitySet="CHAMCONG">
+                <ScalarProperty Name="MACHAMCONG" ColumnName="MACHAMCONG" />
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+                <ScalarProperty Name="THANG" ColumnName="THANG" />
+                <ScalarProperty Name="NAM" ColumnName="NAM" />
+                <ScalarProperty Name="NGAYLAMVIEC" ColumnName="NGAYLAMVIEC" />
+                <ScalarProperty Name="MACA" ColumnName="MACA" />
+                <ScalarProperty Name="TT" ColumnName="TT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHUCVUs">
+            <EntityTypeMapping TypeName="QuanlynhansuChampaIslandModel.CHUCVU">
+              <MappingFragment StoreEntitySet="CHUCVU">
+                <ScalarProperty Name="MACV" ColumnName="MACV" />
+                <ScalarProperty Name="TENCV" ColumnName="TENCV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUONGs">
+            <EntityTypeMapping TypeName="QuanlynhansuChampaIslandModel.LUONG">
+              <MappingFragment StoreEntitySet="LUONG">
+                <ScalarProperty Name="MALUONG" ColumnName="MALUONG" />
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+                <ScalarProperty Name="THANG" ColumnName="THANG" />
+                <ScalarProperty Name="NAM" ColumnName="NAM" />
+                <ScalarProperty Name="LUONGCOBAN" ColumnName="LUONGCOBAN" />
+                <ScalarProperty Name="PHUCAP" ColumnName="PHUCAP" />
+                <ScalarProperty Name="LUONGTONG" ColumnName="LUONGTONG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHANVIENs">
+            <EntityTypeMapping TypeName="QuanlynhansuChampaIslandModel.NHANVIEN">
+              <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+                <ScalarProperty Name="MACV" ColumnName="MACV" />
+                <ScalarProperty Name="HONV" ColumnName="HONV" />
+                <ScalarProperty Name="TENLOT" ColumnName="TENLOT" />
+                <ScalarProperty Name="TENNV" ColumnName="TENNV" />
+                <ScalarProperty Name="NGAYSINH" ColumnName="NGAYSINH" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="GIOITINH" ColumnName="GIOITINH" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="NGAYVAOLAM" ColumnName="NGAYVAOLAM" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="ANHNV" ColumnName="ANHNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHANCONGs">
+            <EntityTypeMapping TypeName="QuanlynhansuChampaIslandModel.PHANCONG">
+              <MappingFragment StoreEntitySet="PHANCONG">
+                <ScalarProperty Name="MAPC" ColumnName="MAPC" />
+                <ScalarProperty Name="MACA" ColumnName="MACA" />
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUANTRIs">
+            <EntityTypeMapping TypeName="QuanlynhansuChampaIslandModel.QUANTRI">
+              <MappingFragment StoreEntitySet="QUANTRI">
+                <ScalarProperty Name="Email" ColumnName="EMAIL" />
+                <ScalarProperty Name="ADMIN" ColumnName="ADMIN" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Password" ColumnName="PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CaLamViec_TimKiemNC" FunctionName="QuanlynhansuChampaIslandModel.Store.CaLamViec_TimKiemNC" />
+          <FunctionImportMapping FunctionImportName="NhanVien_TimKiemNC" FunctionName="QuanlynhansuChampaIslandModel.Store.NhanVien_TimKiemNC" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

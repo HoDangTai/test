@@ -1,0 +1,38 @@
+﻿@model QuanLyNhanSu_HoDangTai_63135354.Models.CHUCVU
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h3>Bạn có chắc muốn xoá chức vụ?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã chức vụ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MACV)
+        </dd>
+        <dt>
+            Tên chức vụ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENCV)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xoá" class="btn btn-default" /> |
+            @Html.ActionLink("Trở lại", "Index")
+        </div>
+    }
+</div>

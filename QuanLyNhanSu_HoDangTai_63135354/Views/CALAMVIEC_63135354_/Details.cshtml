@@ -1,0 +1,62 @@
+﻿@model QuanLyNhanSu_HoDangTai_63135354.Models.CALAMVIEC
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết ca làm việc</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã ca
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MACA)
+        </dd>
+        <dt>
+            Mô tả ca làm việc:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MOTACALAMVIEC)
+        </dd>
+        <dt>
+            Mô tả ca làm việc:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MOTACALAMVIEC)
+        </dd>
+
+        <dt>
+            Thời gian bắt đầu
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TGBATDAU)
+        </dd>
+
+        <dt>
+            Thời gian kết thúc
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TGKETTHUC)
+        </dd>
+
+        <dt>
+            Ngày làm việc
+        </dt>
+
+        @{
+            DateTime ngayLamViec = (DateTime)Model.NGAYLAMVIEC;
+            string formattedDate = ngayLamViec.ToString("dd/MM/yyyy");
+        }
+        <dd>
+            @formattedDate
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { id = Model.MACA }) |
+    @Html.ActionLink("Trở lại", "Index")
+</p>
